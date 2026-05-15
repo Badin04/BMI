@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="th">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="bbm.css">
+</head>
+<body>
+    <header>
+        <h1> โปรแกรมคำนวณ BMI</h1>
+        <p id="today-date"></p>
+    </header>
+
+    <section id="form-section">
+        <h2>กรอกข้อมูล</h2>
+        <input type="text" id="username" placeholder="ป้อนชื่อ">
+        <input type="number" id="weight" placeholder="น้ำหนัก (กิโลกรัม)">
+        <input type="number" id="height" placeholder="ส่วนสูง (เซนติเมตร)">
+        <button id="calc-btn">คำนวณ BMI</button>
+    </section>
+
+    <section id="result-section">
+        <h2>ผลลัพธ์</h2>
+        <p id="bmi-result">-</p>
+        <p id="bmi-status">-</p>
+    </section>
+
+    <section id="history-section">
+        <h2>ประวัติการคำนวณ</h2>
+        <input type="date" id="search-date">
+        <table>
+            <thead>
+                <tr>
+                    <th>วันที่</th>
+                    <th>ชื่อ</th>
+                    <th>น้ำหนัก</th>
+                    <th>ส่วนสูง</th>
+                    <th>BMI</th>
+                    <th>สถานะ</th>
+                    <th>ลบ</th>
+                </tr>
+            </thead>
+            <tbody id="history-list"></tbody>
+        </table>
+        <button id="clear-btn">ล้างข้อมูลทั้งหมด</button>
+    </section>
+
+    <script src="bmm.js"></script>
+</body>
+</html>
