@@ -1,49 +1,108 @@
 <!DOCTYPE html>
 <html lang="th">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BMI Calculator</title>
+    <title>FitCheck - BMI Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="bbm.css">
 </head>
 <body>
-    <header>
-        <h1> โปรแกรมคำนวณ BMI</h1>
-        <p id="today-date"></p>
+
+    <header class="app-header">
+        <div class="header-content">
+            <h1 class="logo">🥗 FitCheck <span>BMI</span></h1>
+            <p id="today-date" class="date-text"></p>
+        </div>
     </header>
 
-    <section id="form-section">
-        <h2>กรอกข้อมูล</h2>
-        <input type="text" id="username" placeholder="ป้อนชื่อ">
-        <input type="number" id="weight" placeholder="น้ำหนัก (กิโลกรัม)">
-        <input type="number" id="height" placeholder="ส่วนสูง (เซนติเมตร)">
-        <button id="calc-btn">คำนวณ BMI</button>
-    </section>
+    <nav class="tab-navigation">
+        <button id="tab-calc" class="tab-btn active">📊 คำนวณค่า BMI</button>
+        <button id="tab-history" class="tab-btn">📜 ประวัติการคำนวณ</button>
+    </nav>
 
-    <section id="result-section">
-        <h2>ผลลัพธ์</h2>
-        <p id="bmi-result">-</p>
-        <p id="bmi-status">-</p>
-    </section>
+    <main class="main-content">
+        
+        <div id="page-calc" class="page-view">
+            <div class="split-layout">
+                <section class="card">
+                    <h2 class="card-title">วิเคราะห์ดัชนีมวลกาย</h2>
+                    <form id="bmi-form" onsubmit="return false;">
+                        <div class="form-group">
+                            <label for="username">ชื่อของคุณ</label>
+                            <input type="text" id="username" placeholder="เช่น สมชาย ใจดี">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="weight">น้ำหนัก (กก.)</label>
+                                <input type="number" id="weight" step="0.1" placeholder="65.5">
+                            </div>
+                            <div class="form-group">
+                                <label for="height">ส่วนสูง (ซม.)</label>
+                                <input type="number" id="height" placeholder="170">
+                            </div>
+                        </div>
+                        <button id="calc-btn" class="btn btn-primary">คำนวณผลลัพธ์</button>
+                    </form>
+                </section>
 
-    <section id="history-section">
-        <h2>ประวัติการคำนวณ</h2>
-        <input type="date" id="search-date">
-        <table>
-            <thead>
-                <tr>
-                    <th>วันที่</th>
-                    <th>ชื่อ</th>
-                    <th>น้ำหนัก</th>
-                    <th>ส่วนสูง</th>
-                    <th>BMI</th>
-                    <th>สถานะ</th>
-                    <th>ลบ</th>
-                </tr>
-            </thead>
-            <tbody id="history-list"></tbody>
-        </table>
-        <button id="clear-btn">ล้างข้อมูลทั้งหมด</button>
-    </section>
+                <section class="card result-card">
+                    <h2 class="card-title">ผลลัพธ์การประเมิน</h2>
+                    <div class="result-display">
+                        <div class="bmi-score-wrapper">
+                            <span class="score-label">ค่า BMI ของคุณ</span>
+                            <h3 id="bmi-result">--</h3>
+                        </div>
+                        <div id="bmi-status" class="status-badge">รอการคำนวณ</div>
+                    </div>
+                    
+                    <div class="bmi-gauge-bar">
+                        <div class="gauge-zone zone-under" title="น้ำหนักน้อย"></div>
+                        <div class="gauge-zone zone-normal" title="ปกติ"></div>
+                        <div class="gauge-zone zone-over" title="น้ำหนักเกิน"></div>
+                        <div class="gauge-zone zone-obese" title="อ้วน"></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <div id="page-history" class="page-view hidden">
+            <section class="card">
+                <div class="history-header">
+                    <h2 class="card-title">ประวัติการบันทึกข้อมูล</h2>
+                    <div class="filter-box">
+                        <label for="search-date">📅 กรองตามวันที่:</label>
+                        <input type="date" id="search-date">
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>วันที่</th>
+                                <th>ชื่อ</th>
+                                <th>น้ำหนัก</th>
+                                <th>ส่วนสูง</th>
+                                <th>ค่า BMI</th>
+                                <th>สถานะเกณฑ์</th>
+                                <th style="text-align: center;">จัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-list">
+                            </tbody>
+                    </table>
+                </div>
+
+                <div class="history-actions">
+                    <button id="clear-btn" class="btn-text-danger">ล้างประวัติทั้งหมด</button>
+                </div>
+            </section>
+        </div>
+
+    </main>
 
     <script src="bmm.js"></script>
 </body>
