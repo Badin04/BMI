@@ -1,6 +1,5 @@
-// ==========================================
-// 1. STATE & CORE STORAGE MANAGEMENT
-// ==========================================
+//STATE & CORE STORAGE MANAGEMENT
+
 let bmiHistory = JSON.parse(localStorage.getItem("bmiHistory")) || [];
 
 // ตั้งค่าเวลาปัจจุบันแสดงบนหน้าจอ
@@ -22,9 +21,9 @@ const bmiStatusDisplay = document.getElementById("bmi-status");
 const searchDateInput = document.getElementById("search-date");
 const historyList = document.getElementById("history-list");
 
-// ==========================================
-// 2. TAB ROUTING FUNCTION (ระบบสลับ 2 หน้า)
-// ==========================================
+
+//TAB ROUTING FUNCTION (ระบบสลับ 2 หน้า)
+
 const tabCalc = document.getElementById("tab-calc");
 const tabHistory = document.getElementById("tab-history");
 const pageCalc = document.getElementById("page-calc");
@@ -48,16 +47,16 @@ function switchPage(pageName) {
     }
 }
 
-// ==========================================
-// 3. EVENT LISTENERS
-// ==========================================
+
+//EVENT LISTENERS
+
 document.getElementById("calc-btn").addEventListener("click", processBmiCalculation);
 document.getElementById("clear-btn").addEventListener("click", clearAllRecords);
 searchDateInput.addEventListener("change", renderHistoryTable);
 
-// ==========================================
-// 4. BMI COMPUTATION & CORE LOGIC
-// ==========================================
+
+//BMI COMPUTATION & CORE LOGIC
+
 function processBmiCalculation() {
     const name = usernameInput.value.trim();
     const weight = parseFloat(weightInput.value);
@@ -81,7 +80,6 @@ function processBmiCalculation() {
     bmiStatusDisplay.style.backgroundColor = evaluation.color;
     bmiStatusDisplay.style.color = "#ffffff";
 
-    // สร้างออบเจกต์เก็บข้อมูลบันทึกแบบ ISO Date String เพื่อแก้อาการคัดกรองวันที่แล้วบั๊ก
     const currentTimestamp = new Date();
     const newRecord = {
         id: Date.now(),
@@ -107,13 +105,13 @@ function evaluateBmiStatus(bmi) {
     return { text: "โรคอ้วน", color: "#dc2626", badgeClass: "tag-obese" };
 }
 
-// ==========================================
-// 5. RENDERER COMPONENTS (UI RENDERING)
-// ==========================================
+
+//RENDERER COMPONENTS (UI RENDERING)
+
 function renderHistoryTable() {
     historyList.innerHTML = "";
     
-    const filterValue = searchDateInput.value; // จะได้ในฟอร์แมต YYYY-MM-DD
+    const filterValue = searchDateInput.value; 
     
     const filteredData = filterValue 
         ? bmiHistory.filter(item => item.rawDate === filterValue)
@@ -165,9 +163,8 @@ function clearAllRecords() {
     }
 }
 
-// ==========================================
-// 6. UTILITY FUNCTIONS
-// ==========================================
+//UTILITY FUNCTIONS
+
 function saveDataToStorage() {
     localStorage.setItem("bmiHistory", JSON.stringify(bmiHistory));
 }
